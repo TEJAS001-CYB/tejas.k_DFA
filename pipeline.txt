@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '696c1e5d-22e0-481e-bcef-ddb79e8dbe1d', url: 'https://github.com/TEJAS001-CYB/devopy.git']])
+            }
+        }
+        stage('build') {
+            steps {
+                // Add build steps here
+                echo 'Build completed successfully'
+            }
+        }
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('text') {
+            steps {
+                echo 'test is done'
+            }
+        }
+    }
+}

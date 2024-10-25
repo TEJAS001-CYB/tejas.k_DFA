@@ -1,0 +1,45 @@
+import pandas as pd
+
+# Load the dataset
+data = pd.read_csv('user_behavior_dataset.csv')
+
+# Function to search for specific user by User_ID or mobile devices by Device_Type
+def search_user_or_device(data, search_by, search_value):
+    # Search by User_ID
+    if search_by == 'user':
+        result = data[data['User_ID'] == search_value]
+    # Search by mobile devices (assuming 'Device_Type' has entries like 'mobile', 'desktop', etc.)
+    elif search_by == 'device' and search_value.lower() == 'mobile':
+        result = data[data['Device_Type'].str.lower() == 'mobile']
+    else:
+        result = pd.DataFrame()  # Empty DataFrame if no match
+    
+    return result
+
+# Function to get user input and perform search
+def main():
+    print("Search by user or device:")
+    print("1. Search by User_ID")
+    print("2. Search by Device_Type (Mobile)")
+    
+    choice = input("Enter your choice (1 for User, 2 for Mobile Device): ").strip()
+    
+    if choice == '1':
+        user_id = input("Enter the User_ID to search: ").strip()
+        result = search_user_or_device(data, 'user', user_id)
+    elif choice == '2':
+        result = search_user_or_device(data, 'device', 'mobile')
+    else:
+        print("Invalid choice!")
+        return
+    
+    # Display the result
+    if not result.empty:
+        print("Search Results:")
+        print(result)
+    else:
+        print("No matching records found.")
+
+# Run the search function
+if __name__ == "__main__":
+    main()

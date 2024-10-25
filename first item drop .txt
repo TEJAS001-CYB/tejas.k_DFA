@@ -1,0 +1,9 @@
+echo "hello world"
+
+echo "%BUILD_ID%"
+
+mkdir tejas
+
+cd tejas
+
+echo tejas1234567 > "test.txt"
